@@ -2,6 +2,7 @@
 namespace whitemerry\phpkin;
 
 use whitemerry\phpkin\Identifier\Identifier;
+use whitemerry\phpkin\Identifier\SpanIdentifier;
 use whitemerry\phpkin\Logger\Logger;
 use whitemerry\phpkin\Sampler\Sampler;
 
@@ -131,11 +132,15 @@ class Tracer
                 $this->startTimestamp,
                 zipkin_timestamp(),
                 AnnotationBlock::SERVER
-            )
+            ),
+            null,
+            null,
+            new SpanIdentifier($_SERVER['HTTP_X_B3_PARENTSPANID'])
         );
         if ($unsetParentId) {
             $span->unsetParentId();
         }
+
         $this->addSpan($span);
     }
 
