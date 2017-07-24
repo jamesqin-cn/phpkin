@@ -135,7 +135,7 @@ class Tracer
             ),
             null,
             null,
-            new SpanIdentifier($_SERVER['HTTP_X_B3_PARENTSPANID'])
+            new SpanIdentifier($_SERVER['HTTP_X_B3_PARENTSPANID'] ?? null)
         );
         if ($unsetParentId) {
             $span->unsetParentId();
